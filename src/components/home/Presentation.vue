@@ -3,12 +3,21 @@
         <v-col cols="12">
             <v-card>
                 <v-card-title>
-                    Bienvenue sur REMDESK
+                    Stockage de fichier
                 </v-card-title>
                 <v-card-text>
-                    Ce logiciel à pour but de vous aider à organiser vos documents, vous protéger de la perte de
-                    donnée inhérente à la casse de votre système d'exploitation.
-                    Stocker vos mot de passe en toute sécurité.
+                    Stockez et organisez vos documents avec la certitude de les retrouver quelque soit votre poste de
+                    travail.
+                    Ne paniquez plus lorsque que votre système casse et ne perdez plus de temps à synchroniser vos
+                    données sur un disque dur.
+                </v-card-text>
+            </v-card>
+            <v-card>
+                <v-card-title>
+                    Gérez vos mots de passe
+                </v-card-title>
+                <v-card-text>
+                    Ne perdez plus votre temps à réinitialiser vos mots de passe.
                 </v-card-text>
             </v-card>
         </v-col>

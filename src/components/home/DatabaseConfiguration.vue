@@ -3,8 +3,16 @@
         <v-col cols="12">
             <v-card>
                 <v-card-title>
-                    Base de donnée
+                    Base de données
                 </v-card-title>
+                <v-card-actions class="red--text" v-if="$storage.access.databaseSet === false">
+                    <v-icon color="red">mdi-alert</v-icon>
+                    {{ $message.DATABASE_ACCESS_NOT_ALLOWED }}
+                </v-card-actions>
+                <v-card-actions class="green--text" v-if="$storage.access.databaseSet === true">
+                    <v-icon color="green">mdi-check-circle</v-icon>
+                    {{ $message.ACCESS_ALLOWED }}
+                </v-card-actions>
                 <v-card-text>
                     <v-form>
                         <v-row>

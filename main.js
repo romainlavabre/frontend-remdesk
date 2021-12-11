@@ -16,8 +16,14 @@ app.on('ready', () => {
         width: 2000,
         height: 2000,
         icon: __dirname + '/assets/favicon.ico',
-        autoHideMenuBar: false
+        autoHideMenuBar: true
     })
     window.loadURL(url)
+
+    let window2 = new BrowserWindow({
+        width: 2000,
+        height: 2000
+    })
+    window2.loadURL("https://google.com");
 })
 
