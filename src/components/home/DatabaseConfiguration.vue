@@ -5,11 +5,11 @@
                 <v-card-title>
                     Base de données
                 </v-card-title>
-                <v-card-actions class="red--text" v-if="$storage.access.databaseSet === false">
+                <v-card-actions class="red--text" v-if="!configured">
                     <v-icon color="red">mdi-alert</v-icon>
                     {{ $message.DATABASE_ACCESS_NOT_ALLOWED }}
                 </v-card-actions>
-                <v-card-actions class="green--text" v-if="$storage.access.databaseSet === true">
+                <v-card-actions class="green--text" v-if="configured">
                     <v-icon color="green">mdi-check-circle</v-icon>
                     {{ $message.ACCESS_ALLOWED }}
                 </v-card-actions>
@@ -34,7 +34,17 @@
 
 <script>
 export default {
-    name: "DatabaseConfiguration"
+    name: "DatabaseConfiguration",
+    data() {
+        return {
+            configured: this.$storage.access.databaseSet
+        }
+    },
+    mounted() {
+        this.$root.$on(this.$event.INITIAL_DATA_CHANGED, () => {
+            this.configured = this.$storage.access.databaseSet;
+        });
+    }
 }
 </script>
 

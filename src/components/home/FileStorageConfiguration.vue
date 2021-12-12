@@ -5,17 +5,18 @@
                 <v-card-title>
                     Stockage de fichier
                 </v-card-title>
-                <v-card-actions class="red--text" v-if="$storage.access.fileSet === false">
+                <v-card-actions class="red--text" v-if="!configured">
                     <v-icon color="red">mdi-alert</v-icon>
                     {{ $message.FILE_ACCESS_NOT_ALLOWED }}
                 </v-card-actions>
-                <v-card-actions class="green--text" v-if="$storage.access.fileSet === true">
+                <v-card-actions class="green--text" v-if="configured">
                     <v-icon color="green">mdi-check-circle</v-icon>
                     {{ $message.ACCESS_ALLOWED }}
                 </v-card-actions>
                 <v-card-text>
                     <v-form>
-                        <v-select v-model="form.provider" label="Fournisseur" :items="[{text: 'AWS', value: 'aws'},{text: 'OVH', value: 'ovh'}]"></v-select>
+                        <v-select v-model="form.provider" label="Fournisseur"
+                                  :items="[{text: 'AWS', value: 'aws'},{text: 'OVH', value: 'ovh'}]"></v-select>
                         <!-- AWS FORM -->
                         <v-row v-if="form.provider === 'aws'">
                             <v-col cols="6">
@@ -50,6 +51,7 @@ export default {
     name: "FileStorageConfiguration",
     data() {
         return {
+            configured: this.$storage.access.fileSet,
             form: {
                 provider: null
             },
@@ -59,6 +61,9 @@ export default {
         }
     },
     mounted() {
+        this.$root.$on(this.$event.INITIAL_DATA_CHANGED, () => {
+            this.configured = this.$storage.access.fileSet;
+        });
     }
 }
 </script>

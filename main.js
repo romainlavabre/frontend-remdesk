@@ -19,11 +19,5 @@ app.on('ready', () => {
         autoHideMenuBar: true
     })
     window.loadURL(url)
-
-    let window2 = new BrowserWindow({
-        width: 2000,
-        height: 2000
-    })
-    window2.loadURL("https://google.com");
 })
 
