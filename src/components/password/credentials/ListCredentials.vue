@@ -56,6 +56,7 @@ export default {
         this.getAllCredentialsByCard();
 
         this.$root.$on(this.$event.RELOAD_CREDENTIALS, () => this.getAllCredentialsByCard());
+        this.$root.$on(this.$event.CREDENTIAL_CREATED, () => this.getAllCredentialsByCard());
     }
 }
 </script>
