@@ -1,6 +1,6 @@
 <template>
     <v-card>
-        <v-card-title class="text-capitalize" @dblclick="showForm = true" v-if="!showForm">
+        <v-card-title class="text-capitalize selectable" @dblclick="showForm = true" v-if="!showForm">
             {{ card.name }}
         </v-card-title>
         <v-card-title class="text-capitalize" v-if="showForm">
@@ -21,15 +21,18 @@
             <hr>
         </v-card-subtitle>
         <v-card-text>
-
+            <ListCredentials :card="card"/>
         </v-card-text>
     </v-card>
 </template>
 
 <script>
 
+import ListCredentials from "@/components/password/credentials/ListCredentials";
+
 export default {
     name: "Card",
+    components: {ListCredentials},
     props: ['card'],
     data() {
         return {

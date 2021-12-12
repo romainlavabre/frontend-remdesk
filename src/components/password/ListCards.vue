@@ -3,15 +3,18 @@
         <v-col cols="4" v-for="card in cards">
             <Card :card="card"></Card>
         </v-col>
+
+        <CredentialDetail/>
     </v-row>
 </template>
 
 <script>
 import Card from "@/components/password/Card";
+import CredentialDetail from "@/components/password/credentials/CredentialDetail";
 
 export default {
     name: "ListCards",
-    components: {Card},
+    components: {CredentialDetail, Card},
     data: () => ({
         cards: [],
         cardsLoading: true,
@@ -28,7 +31,7 @@ export default {
                     this.$root.$emit(this.$event.SYSTEM_ALERT, {
                         text: "Impossible de charger les cartes",
                         type: 'error'
-                    })
+                    });
                 });
         }
     },
