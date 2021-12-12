@@ -24,6 +24,7 @@
                 </v-col>
             </v-app-bar>
             <Alert/>
+            <RightClick/>
             <router-view/>
         </v-main>
     </v-app>
@@ -32,10 +33,11 @@
 <script>
 import Alert from "@/components/util/Alert";
 import Loading from "@/components/util/Loading";
+import RightClick from "@/components/util/RightClick";
 
 export default {
     name: 'App',
-    components: {Loading, Alert},
+    components: {RightClick, Loading, Alert},
     data: () => ({
         booted: false,
         contextLoaded: false
@@ -53,8 +55,18 @@ export default {
                         text: this.$message.FILE_ACCESS_NOT_ALLOWED + " pour accéder à cet onglet",
                         type: "warning",
                     });
+
+                    if (this.$storage.access.databaseSet === false) {
+                        this.$root.$emit(this.$event.SYSTEM_ALERT, {
+                            text: this.$message.DATABASE_ACCESS_NOT_ALLOWED + " pour accéder à cet onglet",
+                            type: "warning",
+                        });
+                    }
                     return;
                 }
+
+                this.$router.push("Storage");
+                return;
             }
 
             if (zone === 'password') {
