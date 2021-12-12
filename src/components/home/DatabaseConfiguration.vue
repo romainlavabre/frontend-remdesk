@@ -138,6 +138,18 @@ export default {
         this.$root.$on(this.$event.INITIAL_DATA_CHANGED, () => {
             this.configured = this.$storage.access.databaseSet;
         });
+    },
+    watch: {
+        'form.software': function () {
+            switch (this.form.software) {
+                case 'mysql':
+                    this.form.port = '3306';
+                    break;
+                case 'postgresql':
+                    this.form.port = '5432';
+                    break;
+            }
+        }
     }
 }
 </script>
