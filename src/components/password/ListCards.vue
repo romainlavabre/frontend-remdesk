@@ -1,21 +1,17 @@
 <template>
     <v-row>
         <v-col cols="4" v-for="card in cards">
-            <v-card>
-                <v-card-title>
-                    {{ card.name }}
-                </v-card-title>
-                <v-card-text>
-
-                </v-card-text>
-            </v-card>
+            <Card :card="card"></Card>
         </v-col>
     </v-row>
 </template>
 
 <script>
+import Card from "@/components/password/Card";
+
 export default {
     name: "ListCards",
+    components: {Card},
     data: () => ({
         cards: [],
         cardsLoading: true,
@@ -38,6 +34,10 @@ export default {
     },
     mounted() {
         this.getAllCard();
+
+        this.$root.$on(this.$event.CARD_CREATED, () => {
+            this.getAllCard();
+        });
     }
 }
 </script>

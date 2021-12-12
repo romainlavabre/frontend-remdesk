@@ -34,6 +34,8 @@ export default {
                         text: "Carte créé",
                         type: 'success'
                     });
+
+                    this.$root.$emit(this.$event.CARD_CREATED);
                 })
                 .catch(error => {
                     this.$root.$emit(this.$event.SYSTEM_ALERT, {

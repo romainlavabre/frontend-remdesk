@@ -7,7 +7,7 @@
         <v-main v-if="contextLoaded">
             <v-app-bar
                 color="blue-grey darken-3">
-                <v-col cols="1">
+                <v-col cols="1" @click="redirect('home')">
                     <v-btn icon title="Accueil">
                         <v-icon>mdi-home</v-icon>
                     </v-btn>
@@ -37,10 +37,15 @@ export default {
     name: 'App',
     components: {Loading, Alert},
     data: () => ({
+        booted: false,
         contextLoaded: false
     }),
     methods: {
         redirect(zone) {
+            if (zone === 'home') {
+                this.$router.push("Home");
+            }
+
             if (zone === 'file') {
                 if (this.$storage.access.fileSet === false) {
                     this.$root.$emit(this.$event.SYSTEM_ALERT, {
@@ -80,7 +85,24 @@ export default {
                 }
             }
 
-            this.contextLoaded = true;
+            this.booted = true;
+        },
+        loadInitialData() {
+            this.$http
+                .get(process.env.VUE_APP_BACKEND_URL + "/guest/configuration/loaded")
+                .then(response => {
+                    this.$storage.access.databaseSet = response.data.database;
+                    this.$storage.access.fileSet = response.data.storage;
+
+                    this.$root.$emit(this.$event.INITIAL_DATA_CHANGED);
+                    this.contextLoaded = true;
+                })
+                .catch(error => {
+                    this.$root.$emit(this.$event.SYSTEM_ALERT, {
+                        text: "Impossible de charger les données initiale",
+                        type: 'error'
+                    });
+                });
         },
         sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
@@ -88,6 +110,11 @@ export default {
     },
     mounted() {
         this.ping();
+    },
+    watch: {
+        booted: function () {
+            this.loadInitialData();
+        }
     }
 }
 </script>
