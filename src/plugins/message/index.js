@@ -7,7 +7,11 @@ export default {
         DATABASE_CONFIGURATION_SOFTWARE_REQUIRED: "Serveur requis",
         DATABASE_CONFIGURATION_HOST_REQUIRED: "IP requise",
         DATABASE_CONFIGURATION_USERNAME_REQUIRED: "Nom d'utilisateur requis",
-        DATABASE_CONFIGURATION_PORT_REQUIRED: "Port requis"
+        DATABASE_CONFIGURATION_PORT_REQUIRED: "Port requis",
+        STORAGE_CONFIGURATION_ZONE_REQUIRED: "Zone requise",
+        STORAGE_CONFIGURATION_COMPARTMENT_REQUIRED: "Compartiment requis",
+        STORAGE_CONFIGURATION_CLIENT_SECRET_REQUIRED: "Secret requis",
+        STORAGE_CONFIGURATION_CLIENT_ID_REQUIRED: "Identifiant requis"
     },
     select: function (error) {
         for (const key in this.backendMessages) {
