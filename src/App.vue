@@ -1,10 +1,14 @@
 <template>
     <v-app>
-        <v-main>
+        <v-main style="background: #333333" class="text-center" v-if="!contextLoaded">
+            <img src="@/assets/logo.png" style="margin-top: 1px; height: 50%"/>
+            <Loading color="red"/>
+        </v-main>
+        <v-main v-if="contextLoaded">
             <v-app-bar
                 color="blue-grey darken-3">
                 <v-col cols="1">
-                    <v-btn icon color="green" title="Acceuil">
+                    <v-btn icon title="Accueil">
                         <v-icon>mdi-home</v-icon>
                     </v-btn>
                 </v-col>
@@ -27,12 +31,13 @@
 
 <script>
 import Alert from "@/components/util/Alert";
+import Loading from "@/components/util/Loading";
 
 export default {
     name: 'App',
-    components: {Alert},
+    components: {Loading, Alert},
     data: () => ({
-        //
+        contextLoaded: false
     }),
     methods: {
         redirect(zone) {
@@ -55,7 +60,37 @@ export default {
                     return;
                 }
             }
+        },
+        async ping() {
+            let rebooted = false;
+
+            while (!rebooted) {
+                this.$http
+                    .get(process.env.VUE_APP_BACKEND_URL + "/guest/system/ping")
+                    .then((response) => {
+                        rebooted = true;
+                    })
+                    .catch((error) => {
+                    });
+
+                if (!rebooted) {
+                    await this.sleep(1000);
+                }
+            }
+
+            this.$root.$emit(this.$event.SYSTEM_ALERT, {
+                text: "Système démarré avec succès",
+                type: 'green'
+            });
+
+            this.contextLoaded = true;
+        },
+        sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
         }
+    },
+    mounted() {
+        this.ping();
     }
 }
 </script>
