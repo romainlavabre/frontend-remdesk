@@ -5,7 +5,7 @@
     "scripts": {
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
-        "start": "export SET NODE_OPTIONS=--openssl-legacy-provider && NODE_ENV=DEV && BACKEND_URL=localhost:8085 vue-cli-service serve & sleep 5 && NODE_ENV=DEV electron main.js"
+        "start": "export SET NODE_OPTIONS=--openssl-legacy-provider && NODE_ENV=DEV && vue-cli-service serve & sleep 5 && NODE_ENV=DEV electron main.js"
     },
     "main": "main.js",
     "dependencies": {

@@ -1,6 +1,7 @@
 <template>
     <div>
-        <ul id="right-click-menu" tabindex="-1" v-if="viewMenu" ref="right" v-on:blur="closeMenu()">
+        <ul id="right-click-menu" tabindex="-1" v-if="viewMenu" ref="right" v-on:blur="closeMenu()"
+            :style="'top: ' + top + '; left: ' + left + ';'">
             <li v-for="item in items" class="selectable" @click="item.executable(); closeMenu()">
                 <v-icon>{{ item.icon }}</v-icon>
                 {{ item.name }}
@@ -35,6 +36,7 @@ export default {
         },
         closeMenu: function () {
             this.viewMenu = false;
+            this.items = [];
         },
         openMenu: function (e) {
             this.viewMenu = true;
@@ -47,7 +49,10 @@ export default {
     },
     mounted() {
         this.$root.$on(this.$event.RIGHT_CLICK, (data) => {
-            this.items = data.items;
+            for (let i = 0; i < data.items.length; i++) {
+                this.items.push(data.items[i]);
+            }
+
             this.openMenu(data.event);
         })
     }
