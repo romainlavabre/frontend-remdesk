@@ -4,13 +4,18 @@
             <Loading/>
         </v-row>
 
-        <v-row v-for="credential in credentials" v-if="!credentialsLoading">
-            <v-col cols="12" class="text-capitalize selectable" @click="openCredential(credential)">
-                {{ credential.name }}
-                <hr>
-            </v-col>
-
-        </v-row>
+        <v-list style="max-height: 260px" class="overflow-y-auto" v-if="!credentialsLoading">
+            <template v-for="credential in credentials">
+                <v-list-item :key="credential.id" avatar @click="openCredential(credential)">
+                    <v-list-item-icon>
+                        <v-icon>mdi-lock</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                        <v-list-item-title v-text="credential.name"></v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+            </template>
+        </v-list>
 
         <v-row v-if="!credentialsLoading && credentials.length === 0">
             Aucune donnée

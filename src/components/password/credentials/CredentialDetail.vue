@@ -139,7 +139,6 @@ export default {
     },
     mounted() {
         this.$root.$on(this.$event.OPEN_CREDENTIAL, (credential) => {
-            console.log(credential)
             this.credential = credential;
             this.open = true;
         });

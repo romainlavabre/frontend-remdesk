@@ -23,8 +23,6 @@ export default {
     },
     select: function (error) {
         for (const key in this.backendMessages) {
-            console.log(key)
-            console.log(error)
             if (key === error) {
                 return this.backendMessages[key];
             }
