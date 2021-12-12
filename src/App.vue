@@ -44,6 +44,7 @@ export default {
         redirect(zone) {
             if (zone === 'home') {
                 this.$router.push("Home");
+                return;
             }
 
             if (zone === 'file') {
@@ -66,6 +67,7 @@ export default {
                 }
 
                 this.$router.push("Password");
+                return;
             }
         },
         async ping() {

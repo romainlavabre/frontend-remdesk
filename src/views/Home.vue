@@ -19,9 +19,6 @@ import FileStorageConfiguration from "@/components/home/FileStorageConfiguration
 
 export default {
     name: 'Home',
-    data() {
-        //
-    },
     components: {
         FileStorageConfiguration,
         DatabaseConfiguration,
