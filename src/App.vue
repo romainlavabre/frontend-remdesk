@@ -59,6 +59,8 @@ export default {
                     });
                     return;
                 }
+
+                this.$router.push("Password");
             }
         },
         async ping() {
@@ -77,11 +79,6 @@ export default {
                     await this.sleep(1000);
                 }
             }
-
-            this.$root.$emit(this.$event.SYSTEM_ALERT, {
-                text: "Système démarré avec succès",
-                type: 'green'
-            });
 
             this.contextLoaded = true;
         },

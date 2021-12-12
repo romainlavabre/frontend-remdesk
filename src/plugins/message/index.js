@@ -11,7 +11,15 @@ export default {
         STORAGE_CONFIGURATION_ZONE_REQUIRED: "Zone requise",
         STORAGE_CONFIGURATION_COMPARTMENT_REQUIRED: "Compartiment requis",
         STORAGE_CONFIGURATION_CLIENT_SECRET_REQUIRED: "Secret requis",
-        STORAGE_CONFIGURATION_CLIENT_ID_REQUIRED: "Identifiant requis"
+        STORAGE_CONFIGURATION_CLIENT_ID_REQUIRED: "Identifiant requis",
+        CARD_NAME_REQUIRED: "Nom requis",
+        CARD_NAME_TOO_LONG: "Nom trop long (255 caractère maximum)",
+        CREDENTIAL_NAME_REQUIRED: "Nom requis",
+        CREDENTIAL_NAME_TOO_LONG: "Nom trop long (255 caractère maximum)",
+        CREDENTIAL_USERNAME_REQUIRED: "Nom d'utilisateur / identifiant requis",
+        CREDENTIAL_USERNAME_TOO_LONG: "Nom d'utilisateur / identifiant trop long",
+        CREDENTIAL_PASSWORD_REQUIRED: "Mot de passe / secret requis",
+        CREDENTIAL_CARD_REQUIRED: "Carte requise"
     },
     select: function (error) {
         for (const key in this.backendMessages) {
