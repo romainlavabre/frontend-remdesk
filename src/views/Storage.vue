@@ -4,6 +4,7 @@
         <ListFolder/>
         <CreateFolder :open="action.createDirectory === true"/>
         <DeleteFolder/>
+        <CreateFile/>
     </v-container>
 </template>
 
@@ -12,10 +13,11 @@ import ListFolder from "@/components/storage/ListFolder";
 import CreateFolder from "@/components/storage/CreateFolder";
 import FolderPath from "@/components/storage/FolderPath"
 import DeleteFolder from "@/components/storage/DeleteFolder";
+import CreateFile from "@/components/storage/file/CreateFile";
 
 export default {
     name: "Storage",
-    components: {DeleteFolder, FolderPath, CreateFolder, ListFolder},
+    components: {CreateFile, DeleteFolder, FolderPath, CreateFolder, ListFolder},
     data() {
         return {
             action: {
@@ -30,9 +32,16 @@ export default {
                 items: [
                     {
                         name: "Créer un dossier",
-                        icon: "mdi-plus",
+                        icon: "mdi-folder",
                         executable: () => {
                             this.action.createDirectory = true;
+                        }
+                    },
+                    {
+                        name: "Créer un fichier",
+                        icon: "mdi-file",
+                        executable: () => {
+                            this.$root.$emit(this.$event.ACTION_CREATE_FILE);
                         }
                     }
                 ]

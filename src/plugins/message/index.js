@@ -19,7 +19,14 @@ export default {
         CREDENTIAL_USERNAME_REQUIRED: "Nom d'utilisateur / identifiant requis",
         CREDENTIAL_USERNAME_TOO_LONG: "Nom d'utilisateur / identifiant trop long",
         CREDENTIAL_PASSWORD_REQUIRED: "Mot de passe / secret requis",
-        CREDENTIAL_CARD_REQUIRED: "Carte requise"
+        CREDENTIAL_CARD_REQUIRED: "Carte requise",
+        FILE_NAME_REQUIRED: "Nom requis",
+        FILE_NAME_TOO_LONG: "Nom trop long",
+        FILE_FILE_REQUIRED: "Fichier requis",
+        FILE_UNABLE_TO_MOVE: "Impossible de déplacer le fichier",
+        FILE_UNABLE_TO_REMOVE: "Impossible de supprimer le fichier",
+        FILE_UNABLE_TO_UPLOAD: "Impossible de créer votre fichier",
+        FILE_ALREADY_EXISTS: "Ce fichier exists déjà"
     },
     select: function (error) {
         for (const key in this.backendMessages) {
