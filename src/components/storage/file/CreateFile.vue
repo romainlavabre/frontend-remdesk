@@ -9,8 +9,8 @@
                 <v-form v-if="!loading" @submit.prevent="createFile()">
                     <v-row>
                         <v-col cols="12">
-                            <v-text-field v-model="form.name" label="Nom" autofocus></v-text-field>
-                            <v-file-input v-model="file" label="Fichier"></v-file-input>
+                            <v-text-field v-model="form.name" label="Nom"></v-text-field>
+                            <v-file-input v-model="file" label="Fichier" autofocus></v-file-input>
                         </v-col>
                         <v-col cols="2">
                             <v-btn type="submit" color="green">
@@ -47,9 +47,7 @@ export default {
             let reader = new FileReader();
             reader.readAsDataURL(this.file);
             reader.onload = () => {
-                let startStr = reader.result.substr(0, 40);
-                let regex = new RegExp("^data:(.+/.*);base64,");
-                let contentType = regex.exec(startStr)[1];
+                let contentType = this.file.type;
                 let content = reader.result.replace("data:" + contentType + ";base64,", "");
 
                 this.$http
@@ -97,6 +95,10 @@ export default {
         file: function () {
             if (this.file !== null && this.form.name === null) {
                 this.form.name = this.file.name.split(".")[0];
+            }
+
+            if (this.file === null) {
+                this.form.name = null;
             }
         }
     }
