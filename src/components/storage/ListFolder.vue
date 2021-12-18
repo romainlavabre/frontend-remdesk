@@ -23,7 +23,7 @@ export default {
     },
     methods: {
         getAllDirectoryByParent() {
-            let path = process.env.VUE_APP_BACKEND_URL + "/guest/folders/by/" + (this.parent === null ? 'root' : 'folder/' + this.parent.id);
+            let path = process.env.VUE_APP_BACKEND_URL + "/guest/folders/by/" + (this.parent === null ? 'root' : 'parent/' + this.parent.id);
 
             this.$http
                 .get(path)
@@ -43,6 +43,10 @@ export default {
         this.getAllDirectoryByParent();
 
         this.$root.$on(this.$event.FOLDER_CREATED, () => this.getAllDirectoryByParent());
+        this.$root.$on(this.$event.FOLDER_SELECTED, (folder) => {
+            this.parent = folder;
+            this.getAllDirectoryByParent();
+        });
     }
 }
 </script>

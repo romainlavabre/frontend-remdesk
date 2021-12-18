@@ -1,5 +1,6 @@
 <template>
-    <v-card class="mx-auto my-12 text-center selectable" max-width="200" @contextmenu.prevent="rightClick($event)">
+    <v-card class="mx-auto my-12 text-center selectable" max-width="200" @contextmenu.prevent="rightClick($event)"
+            @click="selectedFolder()">
         <v-icon size="150" color="info">mdi-folder</v-icon>
         <v-card-text class="text-h6 text-capitalize" v-if="!action.rename">
             {{ folder.name }}
@@ -56,6 +57,9 @@ export default {
                     }
                 ]
             });
+        },
+        selectedFolder() {
+            this.$root.$emit(this.$event.FOLDER_SELECTED, this.folder);
         }
     }
 }

@@ -8,7 +8,7 @@
                 <v-form @submit.prevent="createDirectory()">
                     <v-row>
                         <v-col cols="10">
-                            <v-text-field v-model="form.name" label="Nom"></v-text-field>
+                            <v-text-field v-model="form.name" label="Nom" autofocus></v-text-field>
                         </v-col>
                         <v-col cols="2">
                             <v-btn type="submit" color="green">
