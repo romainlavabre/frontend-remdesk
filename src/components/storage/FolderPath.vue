@@ -59,6 +59,9 @@ export default {
             this.folder = folder;
             this.getPath();
         });
+    },
+    beforeDestroy() {
+        this.$root.$off(this.$event.FOLDER_SELECTED);
     }
 }
 </script>

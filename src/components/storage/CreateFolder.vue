@@ -68,6 +68,9 @@ export default {
                 this.$root.$emit(this.$event.FOLDER_CREATION_ABORTED);
             }
         }
+    },
+    beforeDestroy() {
+        this.$root.$off(this.$event.FOLDER_SELECTED);
     }
 }
 </script>

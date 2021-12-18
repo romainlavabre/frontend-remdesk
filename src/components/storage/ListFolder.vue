@@ -48,6 +48,11 @@ export default {
             this.parent = folder;
             this.getAllDirectoryByParent();
         });
+    },
+    beforeDestroy() {
+        this.$root.$off(this.$event.FOLDER_CREATED);
+        this.$root.$off(this.$event.FOLDER_DELETED);
+        this.$root.$off(this.$event.FOLDER_SELECTED);
     }
 }
 </script>

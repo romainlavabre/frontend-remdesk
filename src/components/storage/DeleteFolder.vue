@@ -67,6 +67,9 @@ export default {
         open: function () {
             this.clearSub = false;
         }
+    },
+    beforeDestroy() {
+        this.$root.$off(this.$event.ACTION_REMOVE_FOLDER);
     }
 }
 </script>

@@ -30,6 +30,9 @@ export default {
         this.$root.$on(this.$event.ACTION_ZIP_FOLDER, (folder) => {
             this.download(folder);
         })
+    },
+    beforeDestroy() {
+        this.$root.$off(this.$event.ACTION_ZIP_FOLDER);
     }
 }
 </script>

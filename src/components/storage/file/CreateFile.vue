@@ -101,6 +101,10 @@ export default {
                 this.form.name = null;
             }
         }
+    },
+    beforeDestroy() {
+        this.$root.$off(this.$event.FOLDER_SELECTED);
+        this.$root.$off(this.$event.ACTION_CREATE_FILE);
     }
 }
 </script>

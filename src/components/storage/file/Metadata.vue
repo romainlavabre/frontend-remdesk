@@ -85,6 +85,9 @@ export default {
             this.file = file;
             this.open = true;
         });
+    },
+    beforeDestroy() {
+        this.$root.$off(this.$event.ACTION_METADATA_FILE)
     }
 }
 </script>

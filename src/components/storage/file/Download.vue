@@ -30,6 +30,9 @@ export default {
         this.$root.$on(this.$event.ACTION_DOWNLOAD_FILE, (file) => {
             this.download(file);
         })
+    },
+    beforeDestroy() {
+        this.$root.$off(this.$event.ACTION_DOWNLOAD_FILE);
     }
 }
 </script>

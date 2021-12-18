@@ -59,6 +59,9 @@ export default {
             this.file = file;
             this.open = true;
         });
+    },
+    beforeDestroy() {
+        this.$root.$off(this.$event.ACTION_REMOVE_FILE);
     }
 }
 </script>
