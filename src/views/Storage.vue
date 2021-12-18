@@ -3,6 +3,7 @@
         <FolderPath/>
         <ListFolder/>
         <ListFile/>
+        <OpenFile/>
         <CreateFolder :open="action.createDirectory === true"/>
         <DeleteFolder/>
         <CreateFile/>

@@ -1,44 +1,22 @@
 <template>
-    <v-dialog v-model="open" v-if="file !== null">
-        <v-card>
-            <v-card-text v-if="content === null">
-                <Loading color="green"/>
-            </v-card-text>
-            <v-card-text v-if="content !== null" class="text-center">
-                <PdfReader :file="file" :content="content" v-if="file.content_type === 'application/pdf'"/>
-                <ImageReader :content="content" v-if="file.content_type.match('^image/')"/>
-                <VideoReader :content="content" :file="file" v-if="file.content_type.match('^video/')"/>
-            </v-card-text>
-        </v-card>
-    </v-dialog>
+    <div></div>
 </template>
 
 <script>
-import PdfReader from "@/components/storage/file/reader/PdfReader";
-import Loading from "@/components/util/Loading";
-import ImageReader from "@/components/storage/file/reader/ImageReader";
-import VideoReader from "@/components/storage/file/reader/VideoReader";
-
 export default {
     name: "OpenFile",
-    components: {VideoReader, ImageReader, Loading, PdfReader},
-    data() {
-        return {
-            open: false,
-            file: null,
-            content: null,
-        }
-    },
     methods: {
-        getBase64() {
+        open(file) {
             this.$http
-                .get(process.env.VUE_APP_BACKEND_URL + "/guest/files/" + this.file.id + "/base_64")
+                .post(process.env.VUE_APP_BACKEND_URL + "/guest/files/" + file.id + "/open")
                 .then(response => {
-                    this.content = "data:" + this.file.content_type + ";base64," + response.data;
+                    this.$root.$emit(this.$event.SYSTEM_ALERT, {
+                        text: "Le fichier va s'ouvrir ..."
+                    })
                 })
                 .catch(error => {
                     this.$root.$emit(this.$event.SYSTEM_ALERT, {
-                        text: "Impossible de lire le fichier",
+                        text: "Impossible d'ouvrir le fichier",
                         type: 'error'
                     })
                 });
@@ -46,28 +24,8 @@ export default {
     },
     mounted() {
         this.$root.$on(this.$event.ACTION_OPEN_FILE, (file) => {
-            return;
-            this.file = file;
-            this.open = true;
+            this.open(file);
         })
-    },
-    watch: {
-        file: function () {
-            if (this.file !== null) {
-                this.getBase64();
-            } else {
-                this.content = null;
-            }
-        },
-        open: function () {
-            if (!this.open) {
-                this.file = null;
-            }
-        }
     }
 }
 </script>
-
-<style scoped>
-
-</style>
