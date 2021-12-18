@@ -1,8 +1,7 @@
 <template>
     <v-card class="mx-auto my-12 text-center selectable pa-0 mt-0" max-width="300"
             @contextmenu.prevent="rightClick($event)">
-        <span>
-        <v-card-text class="text-h5 text-capitalize" v-if="!action.rename">
+        <v-card-text class="text-h5 text-capitalize" v-if="!action.rename" @click="open()">
             <table>
                 <td style="vertical-align: middle">
                     <v-icon size="50" :color="getIcon().color" class="mb-2 mr-2">{{ getIcon().icon }}</v-icon>
@@ -12,7 +11,6 @@
                 </td>
             </table>
         </v-card-text>
-        </span>
         <v-card-text class="text-h6 text-capitalize" v-if="action.rename">
             <v-form @submit.prevent="updateName()">
                 <v-text-field label="Nom" v-model="file.name" autofocus></v-text-field>
@@ -44,6 +42,11 @@ export default {
                 {
                     icon: "mdi-file-word-box",
                     regex: "^text/",
+                    color: "info"
+                },
+                {
+                    icon: "mdi-file-excel",
+                    contentTypes: ["text/csv"],
                     color: "info"
                 },
                 {
@@ -195,6 +198,9 @@ export default {
                     }
                 ]
             });
+        },
+        open() {
+            this.$root.$emit(this.$event.ACTION_OPEN_FILE, this.file);
         }
     }
 }

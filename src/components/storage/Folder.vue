@@ -5,7 +5,7 @@
         <v-card-text class="text-h5 text-capitalize" v-if="!action.rename">
             <table>
                 <td style="vertical-align: middle">
-                    <v-icon size="50" color="info" class="mb-2 mr-2">mdi-folder</v-icon>
+                    <v-icon size="50" color="grey" class="mb-2 mr-2">mdi-folder</v-icon>
                 </td>
                 <td style="vertical-align: middle">
                     {{ folder.name }}
