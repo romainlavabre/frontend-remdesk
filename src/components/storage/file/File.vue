@@ -1,21 +1,21 @@
 <template>
     <v-card class="mx-auto my-12 text-center selectable pa-0 mt-0" max-width="300"
             @contextmenu.prevent="rightClick($event)">
-        <span @click="selectedFolder()">
+        <span>
         <v-card-text class="text-h5 text-capitalize" v-if="!action.rename">
             <table>
                 <td style="vertical-align: middle">
                     <v-icon size="50" color="info" class="mb-2 mr-2">mdi-folder</v-icon>
                 </td>
                 <td style="vertical-align: middle">
-                    {{ folder.name }}
+                    {{ file.name }}
                 </td>
             </table>
         </v-card-text>
         </span>
         <v-card-text class="text-h6 text-capitalize" v-if="action.rename">
             <v-form @submit.prevent="updateName()">
-                <v-text-field label="Nom" v-model="folder.name" autofocus></v-text-field>
+                <v-text-field label="Nom" v-model="file.name" autofocus></v-text-field>
             </v-form>
         </v-card-text>
     </v-card>
@@ -23,8 +23,8 @@
 
 <script>
 export default {
-    name: "Folder",
-    props: ['folder'],
+    name: "File",
+    props: ['file'],
     data() {
         return {
             action: {
@@ -35,12 +35,12 @@ export default {
     methods: {
         updateName() {
             this.$http
-                .patch(process.env.VUE_APP_BACKEND_URL + "/guest/folders/" + this.folder.id + "/name", {
-                    folder: this.folder
+                .patch(process.env.VUE_APP_BACKEND_URL + "/guest/files/" + this.file.id + "/name", {
+                    file: this.file
                 })
                 .then(response => {
                     this.$root.$emit(this.$event.SYSTEM_ALERT, {
-                        text: "Dossier renommé",
+                        text: "Fichier renommé",
                         type: 'success'
                     });
                     this.action.rename = false;
@@ -57,24 +57,21 @@ export default {
                 event: event,
                 items: [
                     {
-                        name: "Renommer le dossier",
+                        name: "Renommer le fichier",
                         icon: "mdi-pencil",
                         executable: () => {
                             this.action.rename = true;
                         }
                     },
                     {
-                        name: "Supprimer le dossier",
+                        name: "Supprimer le fichier",
                         icon: "mdi-delete",
                         executable: () => {
-                            this.$root.$emit(this.$event.ACTION_REMOVE_FOLDER, this.folder);
+                            this.$root.$emit(this.$event.ACTION_REMOVE_FILE, this.file);
                         }
                     }
                 ]
             });
-        },
-        selectedFolder() {
-            this.$root.$emit(this.$event.FOLDER_SELECTED, this.folder);
         }
     }
 }

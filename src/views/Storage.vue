@@ -2,6 +2,7 @@
     <v-container fluid @contextmenu.prevent="rightClick($event)" style="min-height: 1000px;">
         <FolderPath/>
         <ListFolder/>
+        <ListFile/>
         <CreateFolder :open="action.createDirectory === true"/>
         <DeleteFolder/>
         <CreateFile/>
@@ -14,10 +15,11 @@ import CreateFolder from "@/components/storage/CreateFolder";
 import FolderPath from "@/components/storage/FolderPath"
 import DeleteFolder from "@/components/storage/DeleteFolder";
 import CreateFile from "@/components/storage/file/CreateFile";
+import ListFile from "@/components/storage/file/ListFile";
 
 export default {
     name: "Storage",
-    components: {CreateFile, DeleteFolder, FolderPath, CreateFolder, ListFolder},
+    components: {ListFile, CreateFile, DeleteFolder, FolderPath, CreateFolder, ListFolder},
     data() {
         return {
             action: {
