@@ -1,17 +1,19 @@
 <template>
-    <v-container fluid @contextmenu.prevent="rightClick($event)">
+    <v-container fluid @contextmenu.prevent="rightClick($event)" style="min-height: 1000px;">
+        <FolderPath/>
         <ListFolder/>
-        <CreateFolder v-if="action.createDirectory"/>
+        <CreateFolder :open="action.createDirectory === true"/>
     </v-container>
 </template>
 
 <script>
 import ListFolder from "@/components/storage/ListFolder";
 import CreateFolder from "@/components/storage/CreateFolder";
+import FolderPath from "@/components/storage/FolderPath"
 
 export default {
     name: "Storage",
-    components: {CreateFolder, ListFolder},
+    components: {FolderPath, CreateFolder, ListFolder},
     data() {
         return {
             action: {

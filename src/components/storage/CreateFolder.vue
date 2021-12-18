@@ -25,13 +25,13 @@
 <script>
 export default {
     name: "CreateDirectory",
+    props: ['open'],
     data() {
         return {
             form: {
                 name: null,
                 parent_id: null
             },
-            open: true
         }
     },
     methods: {
@@ -54,6 +54,11 @@ export default {
                     });
                 });
         }
+    },
+    mounted() {
+        this.$root.$on(this.$event.FOLDER_SELECTED, (folder) => {
+            this.form.parent_id = folder != null ? folder.id : null;
+        });
     },
     watch: {
         'open': function (open) {
