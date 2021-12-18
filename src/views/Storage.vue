@@ -6,6 +6,7 @@
         <CreateFolder :open="action.createDirectory === true"/>
         <DeleteFolder/>
         <CreateFile/>
+        <Metadata/>
     </v-container>
 </template>
 
@@ -16,10 +17,11 @@ import FolderPath from "@/components/storage/FolderPath"
 import DeleteFolder from "@/components/storage/DeleteFolder";
 import CreateFile from "@/components/storage/file/CreateFile";
 import ListFile from "@/components/storage/file/ListFile";
+import Metadata from "@/components/storage/file/Metadata";
 
 export default {
     name: "Storage",
-    components: {ListFile, CreateFile, DeleteFolder, FolderPath, CreateFolder, ListFolder},
+    components: {Metadata, ListFile, CreateFile, DeleteFolder, FolderPath, CreateFolder, ListFolder},
     data() {
         return {
             action: {

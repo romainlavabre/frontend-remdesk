@@ -185,6 +185,13 @@ export default {
                         executable: () => {
                             this.$root.$emit(this.$event.ACTION_REMOVE_FILE, this.file);
                         }
+                    },
+                    {
+                        name: "Métadonnées",
+                        icon: "mdi-chart-line",
+                        executable: () => {
+                            this.$root.$emit(this.$event.ACTION_METADATA_FILE, this.file);
+                        }
                     }
                 ]
             });
