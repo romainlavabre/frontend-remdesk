@@ -1,14 +1,21 @@
 <template>
-    <v-card class="mx-auto my-12 text-center selectable" max-width="200" @contextmenu.prevent="rightClick($event)">
+    <v-card class="mx-auto my-12 text-center selectable pa-0 mt-0" max-width="300"
+            @contextmenu.prevent="rightClick($event)">
         <span @click="selectedFolder()">
-        <v-icon size="150" color="info">mdi-folder</v-icon>
-        <v-card-text class="text-h6 text-capitalize" v-if="!action.rename">
-            {{ folder.name }}
+        <v-card-text class="text-h5 text-capitalize" v-if="!action.rename">
+            <table>
+                <td style="vertical-align: middle">
+                    <v-icon size="50" color="info" class="mb-2 mr-2">mdi-folder</v-icon>
+                </td>
+                <td style="vertical-align: middle">
+                    {{ folder.name }}
+                </td>
+            </table>
         </v-card-text>
         </span>
         <v-card-text class="text-h6 text-capitalize" v-if="action.rename">
             <v-form @submit.prevent="updateName()">
-                <v-text-field label="Nom" v-model="folder.name"></v-text-field>
+                <v-text-field label="Nom" v-model="folder.name" autofocus></v-text-field>
             </v-form>
         </v-card-text>
     </v-card>
