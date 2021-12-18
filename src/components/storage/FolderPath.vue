@@ -1,10 +1,10 @@
 <template>
-    <v-breadcrumbs :items="parts">
+    <v-breadcrumbs :items="parts" large>
         <template v-slot:divider>
             <v-icon>mdi-forward</v-icon>
         </template>
         <template v-slot:item="{item}">
-            <span class="pa-2 blue--text selectable" @click="selectFolder(item.folder)">
+            <span class="pa-2 blue--text selectable text-h6 text-capitalize" @click="selectFolder(item.folder)">
                 {{ item.text }}
             </span>
         </template>
@@ -48,8 +48,8 @@ export default {
                     });
                 })
         },
-        selectFolder() {
-            this.$root.$emit(this.$event.FOLDER_SELECTED, this.folder);
+        selectFolder(folder) {
+            this.$root.$emit(this.$event.FOLDER_SELECTED, folder);
         }
     },
     mounted() {
