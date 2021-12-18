@@ -69,6 +69,13 @@ export default {
                         executable: () => {
                             this.$root.$emit(this.$event.ACTION_REMOVE_FOLDER, this.folder);
                         }
+                    },
+                    {
+                        name: "Créer une archive",
+                        icon: "mdi-zip-box",
+                        executable: () => {
+                            this.$root.$emit(this.$event.ACTION_ZIP_FOLDER, this.folder);
+                        }
                     }
                 ]
             });
