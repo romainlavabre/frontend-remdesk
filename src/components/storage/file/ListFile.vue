@@ -9,10 +9,11 @@
 
 <script>
 import File from "@/components/storage/file/File";
+import Loading from "@/components/util/Loading";
 
 export default {
     name: "ListFile",
-    components: {File},
+    components: {Loading, File},
     data() {
         return {
             folder: null,

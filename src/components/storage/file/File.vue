@@ -5,7 +5,7 @@
         <v-card-text class="text-h5 text-capitalize" v-if="!action.rename">
             <table>
                 <td style="vertical-align: middle">
-                    <v-icon size="50" color="info" class="mb-2 mr-2">mdi-folder</v-icon>
+                    <v-icon size="50" :color="getIcon().color" class="mb-2 mr-2">{{ getIcon().icon }}</v-icon>
                 </td>
                 <td style="vertical-align: middle">
                     {{ file.name }}
@@ -22,14 +22,101 @@
 </template>
 
 <script>
+import Loading from "@/components/util/Loading";
+
 export default {
     name: "File",
+    components: {Loading},
     props: ['file'],
     data() {
         return {
             action: {
                 rename: false
-            }
+            },
+            icons: [
+                {
+                    icon: "mdi-file-pdf-box",
+                    contentTypes: [
+                        "application/pdf"
+                    ],
+                    color: "red"
+                },
+                {
+                    icon: "mdi-file-word-box",
+                    regex: "^text/",
+                    color: "info"
+                },
+                {
+                    icon: "mdi-image",
+                    regex: "^image/",
+                    color: "red"
+                },
+                {
+                    icon: "mdi-database-search",
+                    contentTypes: [
+                        "application/sql",
+                        "text/sql",
+                        "text/x-sql"
+                    ],
+                    color: "green"
+                },
+                {
+                    icon: "mdi-code-tags",
+                    contentTypes: [
+                        'text/css',
+                        'text/html',
+                        'text/javascript',
+                        'text/markdown',
+                        'text/xml',
+                        'text/xml-external-parsed-entity',
+                        'application/x-php',
+                        'text/x-java',
+                        'x-csharp',
+                        'text/x-clojure',
+                        'text/x-dockerfile',
+                        'text/x-erlang',
+                        'text/x-feature',
+                        'text/x-go',
+                        'text/x-groovy',
+                        'text/x-haskell',
+                        'message/http',
+                        'text/x-kotlin',
+                        'text/x-objectivec',
+                        'text/x-python',
+                        'text/x-ruby',
+                        'text/x-scala',
+                        'text/x-swift',
+                    ],
+                    color: "green"
+                },
+                {
+                    icon: "mdi-zip-box",
+                    contentTypes: [
+                        'application/zip',
+                        'application/x-tar',
+                        'application/x-rar',
+                        'application/x-rar-compressed',
+                        'application/x-zip-compressed',
+                        "application/octet-stream"
+                    ],
+                    color: "yellow"
+                },
+                {
+                    icon: "mdi-video-box",
+                    regex: "^video/",
+                    color: "orange"
+                },
+                {
+                    icon: "mdi-volume-high",
+                    regex: "^audio/",
+                    color: "secondary"
+                },
+                {
+                    icon: "mdi-application-brackets",
+                    regex: "^application/",
+                    color: "secondary"
+                }
+            ]
         }
     },
     methods: {
@@ -51,6 +138,34 @@ export default {
                         type: 'error'
                     });
                 })
+        },
+        getIcon() {
+
+            for (let i = 0; i < this.icons.length; i++) {
+                if (this.icons[i].contentTypes === undefined) {
+                    continue;
+                }
+
+                for (let j = 0; j < this.icons[i].contentTypes.length; j++) {
+                    if (this.file.content_type === this.icons[i].contentTypes[j]) {
+                        return this.icons[i];
+                    }
+                }
+            }
+
+            for (let i = 0; i < this.icons.length; i++) {
+                if (this.icons[i].regex !== undefined) {
+                    if (this.file.content_type.match(this.icons[i].regex)) {
+                        return this.icons[i];
+                    }
+                }
+            }
+
+            return {
+                icon: "mdi-file",
+                contentTypes: [],
+                color: "#333333"
+            };
         },
         rightClick(event) {
             this.$root.$emit(this.$event.RIGHT_CLICK, {
