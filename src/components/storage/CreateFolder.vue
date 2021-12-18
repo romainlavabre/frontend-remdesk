@@ -62,6 +62,8 @@ export default {
     },
     watch: {
         'open': function (open) {
+            this.form.name = null;
+
             if (!open) {
                 this.$root.$emit(this.$event.FOLDER_CREATION_ABORTED);
             }

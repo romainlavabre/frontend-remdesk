@@ -1,6 +1,7 @@
 <template>
     <div>
-        <ul id="right-click-menu" tabindex="-1" v-if="viewMenu" ref="right" v-on:blur="closeMenu()"
+        <ul id="right-click-menu" tabindex="-1" v-if="viewMenu" ref="right"
+            v-on:blur="closeMenu()"
             :style="'top: ' + top + '; left: ' + left + ';'">
             <li v-for="item in items" class="selectable" @click="item.executable(); closeMenu()">
                 <v-icon>{{ item.icon }}</v-icon>
@@ -62,7 +63,8 @@ export default {
 <style scoped>
 #right-click-menu {
     background: #333333;
-    border: 1px solid #333333;
+    border: 0px none;
+    outline: none;
     display: block;
     list-style: none;
     margin: 0;
@@ -73,17 +75,16 @@ export default {
 }
 
 #right-click-menu li {
-    border-bottom: 1px solid #E0E0E0;
+    border-bottom: 1px solid #E0E0E0 !important;
     margin: 0;
     padding: 5px 35px;
 }
 
 #right-click-menu li:last-child {
-    border-bottom: none;
+    border-bottom: none !important;
 }
 
 #right-click-menu li:hover {
     background: #424345;
-    color: #dfd8d8;
 }
 </style>

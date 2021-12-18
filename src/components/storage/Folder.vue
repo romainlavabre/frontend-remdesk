@@ -1,10 +1,11 @@
 <template>
-    <v-card class="mx-auto my-12 text-center selectable" max-width="200" @contextmenu.prevent="rightClick($event)"
-            @click="selectedFolder()">
+    <v-card class="mx-auto my-12 text-center selectable" max-width="200" @contextmenu.prevent="rightClick($event)">
+        <span @click="selectedFolder()">
         <v-icon size="150" color="info">mdi-folder</v-icon>
         <v-card-text class="text-h6 text-capitalize" v-if="!action.rename">
             {{ folder.name }}
         </v-card-text>
+        </span>
         <v-card-text class="text-h6 text-capitalize" v-if="action.rename">
             <v-form @submit.prevent="updateName()">
                 <v-text-field label="Nom" v-model="folder.name"></v-text-field>
@@ -53,6 +54,13 @@ export default {
                         icon: "mdi-pencil",
                         executable: () => {
                             this.action.rename = true;
+                        }
+                    },
+                    {
+                        name: "Supprimer",
+                        icon: "mdi-delete",
+                        executable: () => {
+                            this.$root.$emit(this.$event.ACTION_REMOVE_FOLDER, this.folder);
                         }
                     }
                 ]

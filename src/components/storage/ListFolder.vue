@@ -43,6 +43,7 @@ export default {
         this.getAllDirectoryByParent();
 
         this.$root.$on(this.$event.FOLDER_CREATED, () => this.getAllDirectoryByParent());
+        this.$root.$on(this.$event.FOLDER_DELETED, () => this.getAllDirectoryByParent());
         this.$root.$on(this.$event.FOLDER_SELECTED, (folder) => {
             this.parent = folder;
             this.getAllDirectoryByParent();

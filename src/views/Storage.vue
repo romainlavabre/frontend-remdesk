@@ -3,6 +3,7 @@
         <FolderPath/>
         <ListFolder/>
         <CreateFolder :open="action.createDirectory === true"/>
+        <DeleteFolder/>
     </v-container>
 </template>
 
@@ -10,10 +11,11 @@
 import ListFolder from "@/components/storage/ListFolder";
 import CreateFolder from "@/components/storage/CreateFolder";
 import FolderPath from "@/components/storage/FolderPath"
+import DeleteFolder from "@/components/storage/DeleteFolder";
 
 export default {
     name: "Storage",
-    components: {FolderPath, CreateFolder, ListFolder},
+    components: {DeleteFolder, FolderPath, CreateFolder, ListFolder},
     data() {
         return {
             action: {
