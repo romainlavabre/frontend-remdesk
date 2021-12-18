@@ -8,6 +8,7 @@
         <CreateFile/>
         <Metadata/>
         <Download/>
+        <DeleteFile/>
         <Zip/>
     </v-container>
 </template>
@@ -23,10 +24,12 @@ import Metadata from "@/components/storage/file/Metadata";
 import OpenFile from "@/components/storage/file/OpenFile";
 import Download from "@/components/storage/file/Download";
 import Zip from "@/components/storage/Zip";
+import DeleteFile from "@/components/storage/file/DeleteFile";
 
 export default {
     name: "Storage",
     components: {
+        DeleteFile,
         Zip,
         Download,
         OpenFile,
