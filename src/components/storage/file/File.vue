@@ -190,6 +190,13 @@ export default {
                         }
                     },
                     {
+                        name: "Télécharger",
+                        icon: "mdi-download",
+                        executable: () => {
+                            this.$root.$emit(this.$event.ACTION_DOWNLOAD_FILE, this.file);
+                        }
+                    },
+                    {
                         name: "Métadonnées",
                         icon: "mdi-chart-line",
                         executable: () => {
