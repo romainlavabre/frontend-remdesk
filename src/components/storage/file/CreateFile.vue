@@ -84,7 +84,7 @@ export default {
     },
     mounted() {
         this.$root.$on(this.$event.FOLDER_SELECTED, (folder) => {
-            this.form.parent_id = folder != null ? folder.id : null;
+            this.form.folder_id = folder != null ? folder.id : null;
         });
 
         this.$root.$on(this.$event.ACTION_CREATE_FILE, () => this.open = true);
@@ -93,6 +93,11 @@ export default {
         'open': function () {
             this.form.name = null;
             this.file = null;
+        },
+        file: function () {
+            if (this.file !== null && this.form.name === null) {
+                this.form.name = this.file.name.split(".")[0];
+            }
         }
     }
 }

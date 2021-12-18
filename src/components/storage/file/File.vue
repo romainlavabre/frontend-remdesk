@@ -121,6 +121,7 @@ export default {
     },
     methods: {
         updateName() {
+            this.action.rename = false;
             this.$http
                 .patch(process.env.VUE_APP_BACKEND_URL + "/guest/files/" + this.file.id + "/name", {
                     file: this.file
@@ -130,13 +131,13 @@ export default {
                         text: "Fichier renommé",
                         type: 'success'
                     });
-                    this.action.rename = false;
                 })
                 .catch(error => {
                     this.$root.$emit(this.$event.SYSTEM_ALERT, {
                         text: this.$message.select(error.response.data.message),
                         type: 'error'
                     });
+                    this.action.rename = true;
                 })
         },
         getIcon() {
