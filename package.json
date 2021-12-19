@@ -1,17 +1,33 @@
 {
     "name": "remdesk-frontend",
+    "author": {
+        "email": "romainlavabre98@gmail.com",
+        "name": "Romain Lavabre"
+    },
     "version": "0.1.0",
     "private": true,
     "scripts": {
         "serve": "vue-cli-service serve",
-        "build": "vue-cli-service build",
+        "build": "export SET NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service build",
         "start": "export SET NODE_OPTIONS=--openssl-legacy-provider && NODE_ENV=DEV && vue-cli-service serve & sleep 5 && NODE_ENV=DEV electron main.js"
+    },
+    "build": {
+        "appId": "com.remdesk.app",
+        "extraResources": [
+            {
+                "from": "./app.jar",
+                "to": "./app.jar",
+                "filter": [
+                    "**/*"
+                ]
+            }
+        ]
     },
     "main": "main.js",
     "dependencies": {
         "axios": "^0.24.0",
         "core-js": "^3.6.5",
-        "electron": "^16.0.4",
+        "tree-kill": "^1.2.2",
         "vue": "^2.6.11",
         "vue-router": "^3.2.0",
         "vuetify": "^2.4.0"
@@ -20,6 +36,8 @@
         "@vue/cli-plugin-babel": "~4.5.0",
         "@vue/cli-plugin-router": "~4.5.0",
         "@vue/cli-service": "~4.5.0",
+        "electron": "^16.0.5",
+        "electron-builder": "^22.14.5",
         "sass": "~1.32.0",
         "sass-loader": "^10.0.0",
         "vue-cli-plugin-vuetify": "~2.4.5",

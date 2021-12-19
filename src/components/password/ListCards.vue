@@ -1,6 +1,6 @@
 <template>
     <v-row>
-        <v-col cols="4" v-for="card in cards">
+        <v-col cols="4" v-for="card in cards" :key="card.id">
             <Card :card="card"></Card>
         </v-col>
 

@@ -1,7 +1,7 @@
 <template>
     <v-row>
         <Loading v-if="filesLoading"/>
-        <v-col cols="2" class="pa-0" v-for="file in files" v-if="!filesLoading">
+        <v-col cols="2" class="pa-0" v-for="file in files" :key="file.id" v-if="!filesLoading">
             <File :file="file"/>
         </v-col>
     </v-row>

@@ -1,7 +1,7 @@
 <template>
     <v-row>
         <Loading v-if="foldersLoading"/>
-        <v-col cols="2" class="pa-0" v-for="folder in folders" v-if="!foldersLoading">
+        <v-col cols="2" class="pa-0" v-for="folder in folders" :key="folder.id" v-if="!foldersLoading">
             <Folder :folder="folder"/>
         </v-col>
     </v-row>
