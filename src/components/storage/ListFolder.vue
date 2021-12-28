@@ -1,7 +1,9 @@
 <template>
-    <v-row>
+    <v-row class="d-flex justify-space-between">
         <Loading v-if="foldersLoading"/>
-        <v-col cols="2" class="pa-0" v-for="folder in folders" :key="folder.id" v-if="!foldersLoading">
+        <v-col xl="2" lg="2" md="3" sm="4" xs="6" class="pa-0 ma-1" v-for="folder in folders"
+               :key="folder.id"
+               v-if="!foldersLoading">
             <Folder :folder="folder"/>
         </v-col>
     </v-row>

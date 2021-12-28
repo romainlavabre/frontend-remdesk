@@ -17,7 +17,7 @@
                     <Loading v-if="formLoading"/>
                     <v-form @submit.prevent="send()" v-if="!formLoading">
                         <v-row>
-                            <v-col cols="6">
+                            <v-col lg="6" sm="12">
                                 <v-select label="Serveur"
                                           :items="[{text: 'MYSQL', value: 'mysql', selected: true},{text: 'POSTGRESQL', value: 'postgresql'}]"
                                           v-model="form.software"></v-select>
@@ -25,7 +25,7 @@
                                               label="IP du serveur de base de donnée"></v-text-field>
                                 <v-text-field v-model="form.port" label="Port"></v-text-field>
                             </v-col>
-                            <v-col cols="6">
+                            <v-col lg="6" sm="12">
                                 <v-text-field v-model="form.username" type="password"
                                               label="Nom d'utilisateur"></v-text-field>
                                 <v-text-field v-model="form.password" type="password"

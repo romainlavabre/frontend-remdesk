@@ -1,10 +1,10 @@
 <template>
     <v-container fluid>
         <v-row>
-            <v-col cols="6">
+            <v-col lg="6" md="6" sm="12" xs="12">
                 <CreateCard/>
             </v-col>
-            <v-col cols="6">
+            <v-col lg="6" md="6" sm="12" xs="12">
                 <CreateCredential/>
             </v-col>
         </v-row>

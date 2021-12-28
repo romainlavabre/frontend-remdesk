@@ -6,11 +6,11 @@
         <v-card-text>
             <v-form @submit.prevent="send()">
                 <v-row>
-                    <v-col cols="6">
+                    <v-col lg="6" md="12" sm="12" xs="12">
                         <v-text-field v-model="form.name" label="Nom"></v-text-field>
                         <v-text-field v-model="form.link" label="Lien"></v-text-field>
                     </v-col>
-                    <v-col cols="6">
+                    <v-col lg="6" md="12">
                         <v-text-field type="password" v-model="form.username" label="Identifiant"></v-text-field>
                         <v-text-field type="password" v-model="form.password" label="Secret"></v-text-field>
                         <v-autocomplete label="Carte"

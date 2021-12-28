@@ -1,6 +1,6 @@
 <template>
-    <v-row>
-        <v-col cols="4" v-for="card in cards" :key="card.id">
+    <v-row class="d-flex justify-space-between">
+        <v-col lg="4" sm="6" xs="12" v-for="card in cards" :key="card.id">
             <Card :card="card"></Card>
         </v-col>
 
