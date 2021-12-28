@@ -29,29 +29,31 @@ async function createWindow() {
         autoHideMenuBar: true
     })
 
-    let jarPath;
 
-    if (process.env.WEBPACK_DEV_SERVER_URL) {
-        jarPath = process.env.VUE_APP_ABSOLUTE_BACKEND_PATH;
-    } else {
-        jarPath = process.resourcesPath + "/app.jar";
+    if (!process.env.WEBPACK_DEV_SERVER_URL) {
+        let jarPath = process.resourcesPath + "/app.jar";
+        let javaExternalService = spawn("java", ["-jar", jarPath, "--spring.profiles.active=live"]);
+
+        javaExternalService.stdout.on('data', data => {
+            process.stdout.write(data);
+            // Here is where the output goes
+        });
+
+        javaExternalService.stderr.on('data', data => {
+            process.stderr.write(data);
+            // Here is where the error output goes
+        });
+        javaExternalService.on('close', code => {
+            process.stdout.write(code);
+            // Here you can get the exit code of the script
+        });
+        win.on('closed', function () {
+            process.stdout.write("Stop process " + javaExternalService.pid + "...");
+            spawn("kill", [javaExternalService.pid]);
+            process.stdout.write("OK\n")
+        })
+
     }
-
-    let javaExternalService = spawn("java", ["-jar", jarPath, "--spring.profiles.active=live"]);
-
-    javaExternalService.stdout.on('data', data => {
-        process.stdout.write(data);
-        // Here is where the output goes
-    });
-    javaExternalService.stderr.on('data', data => {
-        process.stderr.write(data);
-        // Here is where the error output goes
-    });
-    javaExternalService.on('close', code => {
-        process.stdout.write(code);
-        // Here you can get the exit code of the script
-    });
-
     if (process.env.WEBPACK_DEV_SERVER_URL) {
         // Load the url of the dev server if in development mode
         await win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
@@ -62,12 +64,6 @@ async function createWindow() {
         // Load the index.html when not in development
         win.loadURL('app://./index.html')
     }
-
-    win.on('closed', function () {
-        process.stdout.write("Stop process " + javaExternalService.pid + "...");
-        spawn("kill", ["-9", javaExternalService.pid]);
-        process.stdout.write("OK\n")
-    })
 
 }
 

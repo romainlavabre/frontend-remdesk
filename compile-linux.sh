@@ -9,4 +9,4 @@ cp target/api-0.0.1-SNAPSHOT.jar "$FRONTEND_DIR/app.jar"
 
 cd "$FRONTEND_DIR"
 #yarn build
-npx electron-builder build -l deb
+yarn electron:build
