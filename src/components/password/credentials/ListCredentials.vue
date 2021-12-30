@@ -6,7 +6,8 @@
 
         <v-list style="max-height: 260px" class="overflow-y-auto" v-if="!credentialsLoading">
             <template v-for="credential in credentials">
-                <v-list-item :key="credential.id" avatar @click="openCredential(credential)">
+                <v-list-item :key="credential.id" avatar @click="openCredential(credential)"
+                             @contextmenu.prevent="rightClick($event, credential)">
                     <v-list-item-icon>
                         <v-icon>mdi-key</v-icon>
                     </v-list-item-icon>
@@ -55,6 +56,20 @@ export default {
         },
         openCredential(credential) {
             this.$root.$emit(this.$event.OPEN_CREDENTIAL, credential);
+        },
+        rightClick(event, credential) {
+            this.$root.$emit(this.$event.RIGHT_CLICK, {
+                event: event,
+                items: [
+                    {
+                        name: "Supprimer l'accès",
+                        icon: "mdi-delete",
+                        executable: () => {
+                            this.$root.$emit(this.$event.ACTION_DELETE_CREDENTIAL, credential);
+                        }
+                    }
+                ]
+            });
         }
     },
     mounted() {
@@ -62,6 +77,12 @@ export default {
 
         this.$root.$on(this.$event.RELOAD_CREDENTIALS, () => this.getAllCredentialsByCard());
         this.$root.$on(this.$event.CREDENTIAL_CREATED, () => this.getAllCredentialsByCard());
+        this.$root.$on(this.$event.CREDENTIAL_DELETED, () => this.getAllCredentialsByCard());
+    },
+    beforeDestroy() {
+        this.$root.$off(this.$event.RELOAD_CREDENTIALS);
+        this.$root.$off(this.$event.CREDENTIAL_CREATED);
+        this.$root.$off(this.$event.CREDENTIAL_DELETED);
     }
 }
 </script>

@@ -6,7 +6,7 @@
             </v-card-title>
             <v-card-text>
                 <v-form @submit.prevent="send()">
-                    <v-text-field v-model="form.name" label="Nom"></v-text-field>
+                    <v-text-field v-model="form.name" label="Nom" autofocus></v-text-field>
 
                     <v-btn type="submit" color="green">
                         Créer
