@@ -34,6 +34,13 @@ export default {
                         }
                     },
                     {
+                        name: "Supprimer la carte",
+                        icon: "mdi-delete",
+                        executable: () => {
+                            this.$root.$emit(this.$event.ACTION_DELETE_CARD, this.card);
+                        }
+                    },
+                    {
                         name: "Nouvel accès",
                         icon: "mdi-key",
                         executable: () => {

@@ -38,9 +38,12 @@ export default {
     mounted() {
         this.getAllCard();
 
-        this.$root.$on(this.$event.CARD_CREATED, () => {
-            this.getAllCard();
-        });
+        this.$root.$on(this.$event.CARD_CREATED, () => this.getAllCard());
+        this.$root.$on(this.$event.CARD_DELETED, () => this.getAllCard());
+    },
+    beforeDestroy() {
+        this.$root.$off(this.$event.CARD_CREATED);
+        this.$root.$off(this.$event.CARD_DELETED);
     }
 }
 </script>
