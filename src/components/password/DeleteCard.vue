@@ -1,7 +1,7 @@
 <template>
     <v-dialog v-model="open" width="600px">
         <v-card>
-            <v-card-title>
+            <v-card-title v-if="card !== null">
                 Voulez vous vraiment supprimer la carte {{ card.name }} ? Vous allez perde tous les accès associés
             </v-card-title>
             <v-card-actions class="justify-space-around">

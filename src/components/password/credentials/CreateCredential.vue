@@ -1,7 +1,7 @@
 <template>
     <v-dialog v-model="open" width="600px">
         <v-card>
-            <v-card-title>
+            <v-card-title v-if="card != null">
                 Nouvel accès dans la carte {{ card.name }}
             </v-card-title>
             <v-card-text>

@@ -1,7 +1,7 @@
 <template>
     <v-dialog v-model="open" width="600px">
         <v-card>
-            <v-card-title>
+            <v-card-title v-if="credential !== null">
                 Voulez vous vraiment supprimer l'accès {{ credential.name }} ?
             </v-card-title>
             <v-card-actions class="justify-space-around">
