@@ -8,7 +8,7 @@
             <template v-for="credential in credentials">
                 <v-list-item :key="credential.id" avatar @click="openCredential(credential)">
                     <v-list-item-icon>
-                        <v-icon>mdi-lock</v-icon>
+                        <v-icon>mdi-key</v-icon>
                     </v-list-item-icon>
                     <v-list-item-content>
                         <v-list-item-title v-text="credential.name"></v-list-item-title>

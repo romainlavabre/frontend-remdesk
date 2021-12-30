@@ -12,15 +12,17 @@
         </v-row>
 
         <CreateCard/>
+        <RenameCard/>
     </v-container>
 </template>
 <script>
 import CreateCard from "@/components/password/CreateCard";
 import ListCards from "@/components/password/ListCards";
 import CreateCredential from "@/components/password/credentials/CreateCredential";
+import RenameCard from "@/components/password/RenameCard";
 
 export default {
-    components: {CreateCredential, ListCards, CreateCard},
+    components: {RenameCard, CreateCredential, ListCards, CreateCard},
     methods: {
         rightClick(event) {
             this.$root.$emit(this.$event.RIGHT_CLICK, {
