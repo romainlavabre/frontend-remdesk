@@ -1,9 +1,6 @@
 <template>
-    <v-container fluid>
+    <v-container fluid @contextmenu.prevent="rightClick($event)" style="min-height: 1000px;">
         <v-row>
-            <v-col lg="6" md="6" sm="12" xs="12">
-                <CreateCard/>
-            </v-col>
             <v-col lg="6" md="6" sm="12" xs="12">
                 <CreateCredential/>
             </v-col>
@@ -13,6 +10,8 @@
                 <ListCards/>
             </v-col>
         </v-row>
+
+        <CreateCard/>
     </v-container>
 </template>
 <script>
@@ -21,6 +20,22 @@ import ListCards from "@/components/password/ListCards";
 import CreateCredential from "@/components/password/credentials/CreateCredential";
 
 export default {
-    components: {CreateCredential, ListCards, CreateCard}
+    components: {CreateCredential, ListCards, CreateCard},
+    methods: {
+        rightClick(event) {
+            this.$root.$emit(this.$event.RIGHT_CLICK, {
+                event: event,
+                items: [
+                    {
+                        name: "Créer une carte",
+                        icon: "mdi-format-list-bulleted",
+                        executable: () => {
+                            this.$root.$emit(this.$event.ACTION_CREATE_CARD);
+                        }
+                    }
+                ]
+            });
+        }
+    }
 }
 </script>
