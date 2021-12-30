@@ -32,6 +32,13 @@ export default {
                         executable: () => {
                             this.$root.$emit(this.$event.ACTION_RENAME_CARD, this.card);
                         }
+                    },
+                    {
+                        name: "Nouvel accès",
+                        icon: "mdi-key",
+                        executable: () => {
+                            this.$root.$emit(this.$event.ACTION_CREATE_CREDENTIAL, this.card);
+                        }
                     }
                 ]
             });

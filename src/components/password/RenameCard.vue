@@ -7,8 +7,8 @@
             <v-card-text>
                 <v-form @submit.prevent="updateName()">
                     <v-text-field v-model="form.name" autofocus></v-text-field>
-                    <v-btn color="green">
-                        Enregistrer
+                    <v-btn type="submit" color="green">
+                        Renommer
                     </v-btn>
                 </v-form>
             </v-card-text>

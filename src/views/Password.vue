@@ -1,11 +1,6 @@
 <template>
     <v-container fluid @contextmenu.prevent="rightClick($event)" style="min-height: 1000px;">
         <v-row>
-            <v-col lg="6" md="6" sm="12" xs="12">
-                <CreateCredential/>
-            </v-col>
-        </v-row>
-        <v-row>
             <v-col cols="12">
                 <ListCards/>
             </v-col>
@@ -13,6 +8,7 @@
 
         <CreateCard/>
         <RenameCard/>
+        <CreateCredential/>
     </v-container>
 </template>
 <script>
