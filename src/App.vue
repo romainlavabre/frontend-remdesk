@@ -56,12 +56,15 @@ export default {
                         type: "warning",
                     });
 
-                    if (this.$storage.access.databaseSet === false) {
-                        this.$root.$emit(this.$event.SYSTEM_ALERT, {
-                            text: this.$message.DATABASE_ACCESS_NOT_ALLOWED + " pour accéder à cet onglet",
-                            type: "warning",
-                        });
-                    }
+                    return;
+                }
+
+                if (this.$storage.access.databaseSet === false) {
+                    this.$root.$emit(this.$event.SYSTEM_ALERT, {
+                        text: this.$message.DATABASE_ACCESS_NOT_ALLOWED + " pour accéder à cet onglet",
+                        type: "warning",
+                    });
+
                     return;
                 }
 

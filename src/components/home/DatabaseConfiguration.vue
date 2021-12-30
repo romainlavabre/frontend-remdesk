@@ -83,6 +83,8 @@ export default {
                     });
 
                     this.rebootBackend();
+                    this.$storage.access.databaseSet = true;
+                    this.configured = true;
                 })
                 .catch((error) => {
                     this.$root.$emit(this.$event.SYSTEM_ALERT, {

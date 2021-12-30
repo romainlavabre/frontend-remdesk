@@ -78,6 +78,16 @@ export default {
                         text: "Stockage configuré",
                         type: 'success'
                     });
+
+                    this.$storage.access.fileSet = true;
+                    this.configured = true;
+                    this.form = {
+                        provider: null,
+                        compartment: null,
+                        zone: null,
+                        client_id: null,
+                        client_secret: null
+                    };
                 })
                 .catch(error => {
                     this.$root.$emit(this.$event.SYSTEM_ALERT, {
