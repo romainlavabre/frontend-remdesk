@@ -859,7 +859,7 @@ export default {
 
             this.$http
                 .post(process.env.VUE_APP_BACKEND_URL + "/guest/configuration/file_software_usage", {
-                    file_software_usage: {
+                    storage: {
                         default_command: this.form.default_command,
                         custom_commands: customCommands
                     }
