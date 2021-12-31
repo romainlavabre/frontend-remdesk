@@ -28,7 +28,12 @@ module.exports = {
                 win: {
                     icon: "./build/icons/256x256.png"
                 },
-                productName: 'Remdesk'
+                productName: 'Remdesk',
+                deb: {
+                    depends: [
+                        "java11-runtime-headless"
+                    ]
+                }
             }
         }
     }
