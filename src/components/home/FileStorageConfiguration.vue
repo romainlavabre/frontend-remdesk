@@ -62,6 +62,11 @@
                             </v-col>
                         </v-row>
                     </v-form>
+
+                    Utilisation de {{ sizeToString() }} du disque
+                    <v-btn color="orange" class="ml-15" @click="purgeCache()">
+                        Purger
+                    </v-btn>
                 </v-card-text>
             </v-card>
         </v-col>
@@ -95,7 +100,8 @@ export default {
                     text: "J'ai la 4G et/ou beaucoup d'espace disque et/ou je suis ecolo",
                     value: 2
                 }
-            ]
+            ],
+            cacheSize: 0
         }
     },
     methods: {
@@ -157,10 +163,63 @@ export default {
                         type: "error"
                     })
                 });
+        },
+        getCacheSize() {
+            this.$http
+                .get(process.env.VUE_APP_BACKEND_URL + "/guest/files/cache/metric")
+                .then(response => {
+                    this.cacheSize = response.data.size;
+                })
+                .catch(error => {
+                    this.$root.$emit(this.$event.SYSTEM_ALERT, {
+                        text: "Impossible de charger l'utilisation disque par le cache",
+                        type: "error"
+                    })
+                });
+        },
+        purgeCache() {
+            this.$http
+                .post(process.env.VUE_APP_BACKEND_URL + "/guest/files/cache/clear")
+                .then(response => {
+                    this.$root.$emit(this.$event.SYSTEM_ALERT, {
+                        text: "Cache purgé",
+                        type: "success"
+                    });
+
+                    this.getCacheSize();
+                })
+                .catch(error => {
+                    this.$root.$emit(this.$event.SYSTEM_ALERT, {
+                        text: this.$message.select(error.response.data.message),
+                        type: "error"
+                    })
+                });
+        },
+        sizeToString() {
+            if (this.cacheSize < 1000) {
+                return this.cacheSize + " Octets";
+            }
+
+            if (this.cacheSize > 1000 && this.cacheSize < 1000000) {
+                return Math.round((this.cacheSize / 1000) * 100) / 100 + " Ko";
+            }
+
+            if (this.cacheSize > 1000000 && this.cacheSize < 1000000000) {
+                return Math.round((this.cacheSize / 1000000) * 100) / 100 + " Mo";
+            }
+
+            if (this.cacheSize > 1000000000 && this.cacheSize < 1000000000000) {
+                return Math.round((this.cacheSize / 1000000000) * 100) / 100 + " Go";
+            }
+
+            if (this.cacheSize > 1000000000000) {
+                return Math.round((this.cacheSize / 1000000000000) * 100) / 100 + " To";
+            }
         }
     },
     mounted() {
         this.getCacheLevel();
+        this.getCacheSize();
 
         this.$root.$on(this.$event.INITIAL_DATA_CHANGED, () => {
             this.configured = this.$storage.access.fileSet;
