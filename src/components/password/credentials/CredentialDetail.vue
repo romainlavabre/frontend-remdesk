@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-dialog v-model="open" width="2000" v-if="credential != null">
+        <v-dialog v-model="open" width="2000" v-if="credential != null" style="z-index: 999;">
             <v-card>
                 <v-card-title>
                     <v-row>
@@ -21,56 +21,43 @@
                         <v-row>
                             <v-col cols="6">
                                 <v-row>
-                                    <v-col cols="10">
+                                    <v-col cols="12" @contextmenu.prevent="rightClick($event, credential.name, 'name')">
                                         <v-form @submit.prevent="update('name')">
-                                            <v-text-field v-model="credential.name" label="Lien"
-                                                          @dblclick="updateName = true"
+                                            <v-text-field v-model="credential.name"
+                                                          label="Nom"
                                                           :readonly="!updateName"></v-text-field>
                                         </v-form>
                                     </v-col>
                                 </v-row>
                                 <v-row>
-                                    <v-col cols="10">
+                                    <v-col cols="12" @contextmenu.prevent="rightClick($event, credential.link, 'link')">
                                         <v-form @submit.prevent="update('link')">
-                                            <v-text-field v-model="credential.link" label="Lien"
-                                                          @dblclick="updateLink = true"
+                                            <v-text-field v-model="credential.link"
+                                                          label="Lien"
                                                           :readonly="!updateLink"></v-text-field>
                                         </v-form>
-                                    </v-col>
-                                    <v-col cols="2">
-                                        <v-btn color="info" @click="copy(credential.link)">
-                                            <v-icon>mdi-content-copy</v-icon>
-                                        </v-btn>
                                     </v-col>
                                 </v-row>
                             </v-col>
                             <v-col cols="6">
                                 <v-row>
-                                    <v-col cols="10">
+                                    <v-col @contextmenu.prevent="rightClick($event, credential.username, 'username')">
                                         <v-form @submit.prevent="update('username')">
-                                            <v-text-field v-model="credential.username" label="Identifiant"
-                                                          @dblclick="updateUsername = true"
+                                            <v-text-field v-model="credential.username"
+                                                          label="Identifiant"
+                                                          type="password"
                                                           :readonly="!updateUsername"></v-text-field>
                                         </v-form>
                                     </v-col>
-                                    <v-col cols="2">
-                                        <v-btn color="info" @click="copy(credential.username)">
-                                            <v-icon>mdi-content-copy</v-icon>
-                                        </v-btn>
-                                    </v-col>
                                 </v-row>
                                 <v-row>
-                                    <v-col cols="10">
+                                    <v-col @contextmenu.prevent="rightClick($event, credential.password, 'password')">
                                         <v-form @submit.prevent="update('password')">
-                                            <v-text-field v-model="credential.password" label="Secret"
-                                                          @dblclick="updatePassword = true"
+                                            <v-text-field v-model="credential.password"
+                                                          label="Secret"
+                                                          type="password"
                                                           :readonly="!updatePassword"></v-text-field>
                                         </v-form>
-                                    </v-col>
-                                    <v-col cols="2">
-                                        <v-btn color="info" @click="copy(credential.password)">
-                                            <v-icon>mdi-content-copy</v-icon>
-                                        </v-btn>
                                     </v-col>
                                 </v-row>
                             </v-col>
@@ -134,6 +121,38 @@ export default {
             this.$root.$emit(this.$event.SYSTEM_ALERT, {
                 text: "Copié dans votre press-papier",
                 type: 'success'
+            });
+        },
+        rightClick(event, content, field) {
+            this.$root.$emit(this.$event.RIGHT_CLICK, {
+                event: event,
+                items: [
+                    {
+                        name: "Copier",
+                        icon: "mdi-content-copy",
+                        executable: () => this.copy(content)
+                    },
+                    {
+                        name: "Modifier",
+                        icon: "mdi-pencil",
+                        executable: () => {
+                            switch (field) {
+                                case "link":
+                                    this.updateLink = true;
+                                    break;
+                                case "username":
+                                    this.updateUsername = true;
+                                    break;
+                                case "password":
+                                    this.updatePassword = true;
+                                    break;
+                                case "name":
+                                    this.updateName = true;
+                                    break;
+                            }
+                        }
+                    }
+                ]
             });
         }
     },

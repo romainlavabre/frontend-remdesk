@@ -71,7 +71,7 @@ export default {
     padding: 0;
     position: absolute;
     width: 250px;
-    z-index: 999999;
+    z-index: 99999999;
 }
 
 #right-click-menu li {
