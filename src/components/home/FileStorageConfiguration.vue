@@ -47,6 +47,22 @@
                         </v-row>
                     </v-form>
                 </v-card-text>
+                <v-card-title>
+                    Cache
+                </v-card-title>
+                <v-card-text>
+                    <v-form @submit.prevent="sendPreserveLevel()">
+                        <v-row>
+                            <v-col class="text-right">
+                                <v-select :items="cacheLevel" v-model="form.preserve_network_level"
+                                          label="Niveau du cache"></v-select>
+                                <v-btn color="green" type="submit">
+                                    Enregistrer
+                                </v-btn>
+                            </v-col>
+                        </v-row>
+                    </v-form>
+                </v-card-text>
             </v-card>
         </v-col>
     </v-row>
@@ -63,8 +79,23 @@ export default {
                 compartment: null,
                 zone: null,
                 client_id: null,
-                client_secret: null
-            }
+                client_secret: null,
+                preserve_network_level: null
+            },
+            cacheLevel: [
+                {
+                    text: "J'ai la fibre ou ADSL et/ou peu d'espace disque",
+                    value: 0
+                },
+                {
+                    text: "J'ai un espace disque correct (>=100GO) et/ou la ADSL",
+                    value: 1
+                },
+                {
+                    text: "J'ai la 4G et/ou beaucoup d'espace disque et/ou je suis ecolo",
+                    value: 2
+                }
+            ]
         }
     },
     methods: {
@@ -95,9 +126,42 @@ export default {
                         type: 'error'
                     });
                 })
+        },
+        sendPreserveLevel() {
+            this.$http
+                .patch(process.env.VUE_APP_BACKEND_URL + "/guest/configuration/preserve_network_level", {
+                    storage: this.form
+                })
+                .then(response => {
+                    this.$root.$emit(this.$event.SYSTEM_ALERT, {
+                        text: "Niveau du cache mis à jour",
+                        type: "success"
+                    })
+                })
+                .catch(error => {
+                    this.$root.$emit(this.$event.SYSTEM_ALERT, {
+                        text: this.$message.select(error.response.data.message),
+                        type: "error"
+                    })
+                })
+        },
+        getCacheLevel() {
+            this.$http
+                .get(process.env.VUE_APP_BACKEND_URL + "/guest/configuration/preserve_network_level")
+                .then(response => {
+                    this.form.preserve_network_level = response.data.preserve_network_level;
+                })
+                .catch(error => {
+                    this.$root.$emit(this.$event.SYSTEM_ALERT, {
+                        text: "Impossible de charger le niveau de cache",
+                        type: "error"
+                    })
+                });
         }
     },
     mounted() {
+        this.getCacheLevel();
+
         this.$root.$on(this.$event.INITIAL_DATA_CHANGED, () => {
             this.configured = this.$storage.access.fileSet;
         });

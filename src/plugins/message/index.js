@@ -12,6 +12,8 @@ export default {
         STORAGE_CONFIGURATION_COMPARTMENT_REQUIRED: "Compartiment requis",
         STORAGE_CONFIGURATION_CLIENT_SECRET_REQUIRED: "Secret requis",
         STORAGE_CONFIGURATION_CLIENT_ID_REQUIRED: "Identifiant requis",
+        STORAGE_CONFIGURATION_PRESERVE_NETWORK_LEVEL_REQUIRED: "Niveau de cache requis",
+        STORAGE_CONFIGURATION_PRESERVE_NETWORK_LEVEL_INVALID: "Niveau de cache invalide",
         CARD_NAME_REQUIRED: "Nom requis",
         CARD_NAME_TOO_LONG: "Nom trop long (255 caractère maximum)",
         CREDENTIAL_NAME_REQUIRED: "Nom requis",
