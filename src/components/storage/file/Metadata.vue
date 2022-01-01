@@ -27,6 +27,9 @@
                         <span v-if="item.id === 3">
                             {{ sizeToString() }}
                         </span>
+                        <span v-if="item.id === 4">
+                            {{ file.encrypted ? 'OUI (AES)' : 'NON' }}
+                        </span>
                     </template>
                 </v-treeview>
             </v-card-text>
@@ -53,6 +56,10 @@ export default {
                 {
                     id: 3,
                     name: 'Taille'
+                },
+                {
+                    id: 4,
+                    name: 'Crypté'
                 }
             ]
         }

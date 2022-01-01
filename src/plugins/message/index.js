@@ -28,7 +28,8 @@ export default {
         FILE_UNABLE_TO_MOVE: "Impossible de déplacer le fichier",
         FILE_UNABLE_TO_REMOVE: "Impossible de supprimer le fichier",
         FILE_UNABLE_TO_UPLOAD: "Impossible de créer votre fichier",
-        FILE_ALREADY_EXISTS: "Ce fichier exists déjà"
+        FILE_ALREADY_EXISTS: "Ce fichier exists déjà",
+        FILE_ENCRYPTED_REQUIRED: "Le fichier doit être crypté coté chez le fournisseur ?"
     },
     select: function (error) {
         for (const key in this.backendMessages) {

@@ -30,6 +30,11 @@
                                               label="Nom d'utilisateur"></v-text-field>
                                 <v-text-field v-model="form.password" type="password"
                                               label="Mot de passe"></v-text-field>
+                                <v-textarea v-model="form.encryption_key"
+                                            label="Clé de cryptage"></v-textarea>
+                                <a target="_blank"
+                                   href="https://www.allkeysgenerator.com/Random/Security-Encryption-Key-Generator.aspx">Générez
+                                    une clé de 256 bits</a>
                             </v-col>
                         </v-row>
                         <v-row>
@@ -64,7 +69,8 @@ export default {
                 host: null,
                 port: null,
                 username: null,
-                password: null
+                password: null,
+                encryption_key: null
             }
         }
     },

@@ -9,6 +9,7 @@
                 <v-form v-if="!loading" @submit.prevent="createFile()">
                     <v-row>
                         <v-col cols="12">
+                            <v-switch label="Cryptage chez le fournisseur" v-model="form.encrypted"></v-switch>
                             <v-text-field v-model="form.name" label="Nom"></v-text-field>
                             <v-file-input v-model="file" label="Fichier" autofocus></v-file-input>
                         </v-col>
@@ -35,6 +36,7 @@ export default {
             file: null,
             form: {
                 name: null,
+                encrypted: true,
                 folder_id: null
             },
             open: false,
